@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>The School Navigation</title>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css" />
+    <script src="https://cache.amap.com/lbs/static/es5.min.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.9&key=您申请的key值"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.multiselect.js"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="multipleSelector.css"/>
+	<!-- <script src="https://unpkg.com/vue"></script> -->
+	<script src="vue.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+	<script src="map.js"></script>
+	<script src="ShortestPath_Floyd.js"></script>
+	<script src="TSP_SA.js"></script>
+	<!-- <div id="myPageTop"> -->
+	<div class="address-container">
+		<div id="addressBox" v-if="showCandidate">
+			<p class="title-tips">请在下方选择您需要经过的地点：</p>
+			<div class="checkbox-container">
+				<label v-for="item in buildings">
+					<input type="checkbox"
+						multiple
+						:id="item.id"
+						:value="item"
+						v-model="selectedPostion"> {{item.name}}
+				</label>
+			</div>
+			<p class="title-tips">您选择的地点：</p>
+			<ul v-if='selectedPostion' style="height: auto; max-height: 110px;">
+				<li v-for='item in selectedPostion' Disabled>{{item.name}} -> </li>
+			</ul>
+		</div>
+		<div class="make-route-btn btn" onclick="MakeRoutes()">查看我的最佳路线</div>
+		<div class="clear-btn btn" onclick="ClearSelected()">X 清空</div>
+		<!-- 用来展示生成的路径 -->
+		<div id="idBox" style="font-size: 10px;color: #595959;margin:10px 0px;"></div>
+		<script src="multipleSelector.js"></script>
+	</div>
+	<!-- </div> -->
+</body>
+</html>
